@@ -1,5 +1,5 @@
 /**
-* A text-based user interface to a Nonogram puzzle.
+* A text-based user interface to a Dawgram puzzle.
 * 
 * @author OTechCup
 * @credits ["Mr. O"]
@@ -7,18 +7,18 @@
 */
 
 
-package nonogram;
+package dawgram;
 
 import java.io.*;
 import java.util.*;
 import java.util.regex.*;
 
 
-public class NonogramUI {
+public class DawgramUI {
     /**
      * Default constructor
      */
-    public NonogramUI() {
+    public DawgramUI() {
         scnr       = new Scanner(System.in);
         Scanner fs = null;
         
@@ -28,11 +28,11 @@ public class NonogramUI {
             System.out.println(NGFILE + " not found");
         }
         
-        puzzle     = new Nonogram(fs);
+        puzzle     = new Dawgram(fs);
     }
     
     /**
-     * A string representation of a Nonogram puzzle suitable for console display
+     * A string representation of a Dawgram puzzle suitable for console display
      * If showFullOnly is set, the unknown cells are shown as empty.
      * 
      * @param showFullOnly show all non full cells as empty
@@ -119,7 +119,7 @@ public class NonogramUI {
     }
     
     /**
-     * A string representation of a Nonogram puzzle suitable for console display
+     * A string representation of a Dawgram puzzle suitable for console display
      * 
      * @return a string representation of the puzzle for display
      */
@@ -241,7 +241,7 @@ public class NonogramUI {
      * Display some use4ful help text on the puzzle
      */
     private void help() {
-        System.out.println("Nonogram is a puzzle where you must colour in/fill in the grid according to the patterns");
+        System.out.println("Dawgram is a puzzle where you must colour in/fill in the grid according to the patterns");
         System.out.println("of contiguous full cells given in the rows and columns.  Full cells are shown as '" + FULL_CHAR + "',");
         System.out.println("unknown cells as '" + UNKNOWN_CHAR + "', and cells you are sure are empty as '" + EMPTY_CHAR + "'.");
         System.out.println("If a row or column is invalid (doesn't match the pattern) this will be marked with a '" + INVALID_CHAR + "'; ");
@@ -582,13 +582,13 @@ public class NonogramUI {
     public static String seqAsChar(String seq, boolean showFullOnly) {
         if (seq == null)
             throw new IllegalArgumentException("seq cannot be null");
-        if (seq.length() < Nonogram.MIN_SIZE)
-            throw new IllegalArgumentException("seq cannot be shorter than " + Nonogram.MIN_SIZE);
+        if (seq.length() < Dawgram.MIN_SIZE)
+            throw new IllegalArgumentException("seq cannot be shorter than " + Dawgram.MIN_SIZE);
         
         StringBuffer sb = new StringBuffer();
         
         for (int i=0; i<seq.length(); i++) {
-            int state = Nonogram.UNKNOWN;
+            int state = Dawgram.UNKNOWN;
         
             try {
                 state = Integer.parseInt(seq.substring(i, i+1));
@@ -601,7 +601,7 @@ public class NonogramUI {
             if (!showFullOnly)
                 sb.append(stateAsChar(state));
             else
-                sb.append(state == Nonogram.FULL ? NonogramUI.FULL_CHAR : " ");
+                sb.append(state == Dawgram.FULL ? DawgramUI.FULL_CHAR : " ");
         }
         
         return sb.toString();
@@ -627,16 +627,16 @@ public class NonogramUI {
     public static char stateAsChar(int state) {
         if (!Cell.isValidState(state))
             throw new IllegalArgumentException("invalid state (" + state + ")");
-        if (state == Nonogram.FULL)
+        if (state == Dawgram.FULL)
             return FULL_CHAR;
-        else if (state == Nonogram.EMPTY)
+        else if (state == Dawgram.EMPTY)
             return EMPTY_CHAR;
         else
             return UNKNOWN_CHAR;
     }
     
     /**
-     * Convert a display character into a Nonogram cell state
+     * Convert a display character into a Dawgram cell state
      * 
      * @param c the display character
      * @return the cell state
@@ -646,21 +646,21 @@ public class NonogramUI {
             throw new IllegalArgumentException("invalid state char (" + c + ")");
         
         if (c == FULL_CHAR)
-            return Nonogram.FULL;
+            return Dawgram.FULL;
         else if (c == EMPTY_CHAR)
-            return Nonogram.EMPTY;
+            return Dawgram.EMPTY;
         else
-            return Nonogram.UNKNOWN;
+            return Dawgram.UNKNOWN;
     }
     
     public static void main(String[] args) {
-        NonogramUI ui = new NonogramUI();
+        DawgramUI ui = new DawgramUI();
         
     ui.menu();
     }
     
     private Scanner  scnr   = null;
-    private Nonogram puzzle = null;
+    private Dawgram puzzle = null;
     
     private static final String NGFILE   = "nons/tiny.non";
     public static final char EMPTY_CHAR   = 'X';

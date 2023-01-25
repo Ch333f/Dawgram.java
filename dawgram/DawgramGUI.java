@@ -1,5 +1,5 @@
 /**
-* A gui user interface to a Nonogram puzzle.
+* A gui user interface to a Dawgram puzzle.
 * 
 * @author OTechCup
 * @credits ["Mr. O"]
@@ -7,7 +7,7 @@
 */
 
 
-package nonogram;
+package dawgram;
 
 
 import java.awt.Color;
@@ -31,13 +31,13 @@ import javax.swing.border.LineBorder;
 import javax.swing.JTextPane;
 
 
-public class NonogramGUI extends JFrame {
+public class DawgramGUI extends JFrame {
     
     /**
     * Main constructor
     */
-    public NonogramGUI() {
-        NonogramPuzzle(); // initialize nonogram puzzle
+    public DawgramGUI() {
+        DawgramPuzzle(); // initialize dawgram puzzle
         GUIFrame(); // initialize the gui window
     }
     
@@ -48,13 +48,13 @@ public class NonogramGUI extends JFrame {
     private void GUIFrame() {
         this.setVisible(true); 
         this.setSize(420, 480); 
-        this.setTitle("Nonogram"); 
+        this.setTitle("Dawgram"); 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
         this.setResizable(false); 
         this.getContentPane().setBackground(Color.BLACK); 
         
         GUIMenu(); // initialize gui menu
-        NonogramBoard(); // initialize nonogram board
+        DawgramBoard(); // initialize dawgram board
         DialogueBox(); // initialize dialogue box
         
         messageBox.setText("Start the Game... \nClick on the white cells to make a play...");
@@ -118,7 +118,7 @@ public class NonogramGUI extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 messageBox.setText(
-                    "Nonogram is a puzzle where you must color in/fill in the grid according to the patterns of contiguous full cells given in the rows and columns. Full cells are shown as '" + FULL_CHAR + "', unknown cells as 'Blank Cell' and cells you are sure are empty as '" + EMPTY_CHAR + "'. If a row or column is invalid (doesn't match the pattern) this will be marked with a 'Red Color', a solved row or column is marked with a 'Green Color', but it may still be wrong because of the other columns or rows - keep trying!"
+                    "Dawgram is a puzzle where you must color in/fill in the grid according to the patterns of contiguous full cells given in the rows and columns. Full cells are shown as '" + FULL_CHAR + "', unknown cells as 'Blank Cell' and cells you are sure are empty as '" + EMPTY_CHAR + "'. If a row or column is invalid (doesn't match the pattern) this will be marked with a 'Red Color', a solved row or column is marked with a 'Green Color', but it may still be wrong because of the other columns or rows - keep trying!"
                 );
             }
         });
@@ -126,10 +126,10 @@ public class NonogramGUI extends JFrame {
     
     
     /**
-    * Nonogram board. This create the nonogram puzzle board with 
+    * Dawgram board. This create the dawgram puzzle board with 
     * both the cells and lables
     */
-    private void NonogramBoard() {
+    private void DawgramBoard() {
         // collect the nums for the rows and columns
         int      numRows      = puzzle.getNumRows();
         int      numCols      = puzzle.getNumCols();
@@ -1001,9 +1001,9 @@ public class NonogramGUI extends JFrame {
     
     
     /**
-    * Nonogram puzzle. This create the nonogram puzzle
+    * Dawgram puzzle. This create the dawgram puzzle
     */
-    private void NonogramPuzzle() {
+    private void DawgramPuzzle() {
         Scanner fs = null;
         
         try {
@@ -1012,7 +1012,7 @@ public class NonogramGUI extends JFrame {
             messageBox.setText(NGFILE + " not found");
         }
         
-        puzzle     = new Nonogram(fs);
+        puzzle     = new Dawgram(fs);
     }
     
     
@@ -1042,7 +1042,7 @@ public class NonogramGUI extends JFrame {
     * Get the user's move
     */
     private void getUserMove(char c, int row, int col) {
-        int state = NonogramUI.stateFromChar(c);
+        int state = DawgramUI.stateFromChar(c);
         
         Assign userMove = new Assign(row, col, state);
         
@@ -1051,12 +1051,12 @@ public class NonogramGUI extends JFrame {
       
       
     public static void main(String[] args) {
-        new NonogramGUI(); // create an instance of nonogram gui
+        new DawgramGUI(); // create an instance of dawgram gui
     }
     
     
     private Scanner  scnr   = null;
-    private Nonogram puzzle = null;
+    private Dawgram puzzle = null;
     
     private JTextPane messageBox = null;
     private char moveState = FULL_CHAR;

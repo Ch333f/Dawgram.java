@@ -1,5 +1,5 @@
 /**
-* A cell assignment (i.e. a move) in a Nonogram puzzle.
+* A cell assignment (i.e. a move) in a Dawgram puzzle.
 * 
 * @author OTechCup
 * @credits ["Mr. O"]
@@ -7,7 +7,7 @@
 */
 
 
-package nonogram;
+package dawgram;
 
 
 public class Assign {
@@ -76,5 +76,5 @@ public class Assign {
 	 
   private int row   = 0;
   private int col   = 0;
-  private int state = Nonogram.UNKNOWN;
+  private int state = Dawgram.UNKNOWN;
 }

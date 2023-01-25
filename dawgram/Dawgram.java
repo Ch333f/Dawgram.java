@@ -1,5 +1,5 @@
 /**
-* A Nonogram puzzle.
+* A Dawgram puzzle.
 * 
 * @author OTechCup
 * @credits ["Mr. O"]
@@ -7,7 +7,7 @@
 */
 
 
-package nonogram;
+package dawgram;
 
 import java.io.*;
 import java.util.*;
@@ -17,14 +17,14 @@ import com.google.gson.reflect.TypeToken;
 
 
 @SuppressWarnings("deprecation")
-public class Nonogram extends Observable {
+public class Dawgram extends Observable {
     /**
      * Constructor from a scanner (.non file format)
-     * see https://github.com/mikix/nonogram-db/blob/master/FORMAT.md
+     * see https://github.com/mikix/dawgram-db/blob/master/FORMAT.md
      * 
      * @param scnr the scanner
      */
-    public Nonogram(Scanner scnr) {
+    public Dawgram(Scanner scnr) {
         ArrayList<NGPattern> rowNGPatterns = new ArrayList<>();
         ArrayList<NGPattern> colNGPatterns = new ArrayList<>();
 
@@ -40,22 +40,22 @@ public class Nonogram extends Observable {
                 try {
                     numCols = Integer.parseInt(fields[1]);
                 } catch (NumberFormatException e) {
-                    throw new NonogramException("non-integer width (" +fields[1]+ ")");
+                    throw new DawgramException("non-integer width (" +fields[1]+ ")");
                 }
                 
                 if (numCols < MIN_SIZE)
-                    throw new NonogramException("width cannot be shorter than " + MIN_SIZE);
+                    throw new DawgramException("width cannot be shorter than " + MIN_SIZE);
             } else if (line.startsWith("height")) {
                 String[] fields = line.split("\\W");
                 
                 try {
                     numRows = Integer.parseInt(fields[1]);
                 } catch (NumberFormatException e) {
-                    throw new NonogramException("non-integer height (" +fields[1]+ ")");
+                    throw new DawgramException("non-integer height (" +fields[1]+ ")");
                 }    
                 
                 if (numRows < MIN_SIZE)
-                    throw new NonogramException("height cannot be shorter than " + MIN_SIZE);
+                    throw new DawgramException("height cannot be shorter than " + MIN_SIZE);
             } else if (line.startsWith("rows")) {
                 onRows = true;
                 onCols = false;
@@ -71,11 +71,11 @@ public class Nonogram extends Observable {
                     for (i=0; i<fields.length; i++)
                         nums[i] = Integer.parseInt(fields[i].trim());
                 } catch (NumberFormatException e) {
-                    throw new NonogramException("non-integer num (" +fields[i]+ ")");
+                    throw new DawgramException("non-integer num (" +fields[i]+ ")");
                 }        
                 
                 if (!NGPattern.checkNums(nums))
-                    throw new NonogramException("nums invalid");
+                    throw new DawgramException("nums invalid");
                 
                 NGPattern pat = new NGPattern(nums, numCols);
                 
@@ -89,11 +89,11 @@ public class Nonogram extends Observable {
                     for (i=0; i<fields.length; i++)
                         nums[i] = Integer.parseInt(fields[i].trim());
                 } catch (NumberFormatException e) {
-                    throw new NonogramException("non-integer num (" +fields[i]+ ")");
+                    throw new DawgramException("non-integer num (" +fields[i]+ ")");
                 }
                 
                 if (!NGPattern.checkNums(nums))
-                    throw new NonogramException("nums invalid");
+                    throw new DawgramException("nums invalid");
                 
                 NGPattern pat = new NGPattern(nums, numRows);
                 
@@ -102,10 +102,10 @@ public class Nonogram extends Observable {
         }
         
         if (rowNGPatterns.size() != numRows)
-            throw new NonogramException("incorrect number of rows ("+rowNGPatterns.size()+")");
+            throw new DawgramException("incorrect number of rows ("+rowNGPatterns.size()+")");
         
         if (colNGPatterns.size() != numCols)
-            throw new NonogramException("incorrect number of cols ("+colNGPatterns.size()+")");
+            throw new DawgramException("incorrect number of cols ("+colNGPatterns.size()+")");
         
         // create grid of cells
         cells = new Cell[numRows][numCols];
@@ -366,7 +366,7 @@ public class Nonogram extends Observable {
     }
     
     /**
-     * Set the cell states of an entire nonogram from a single cell state string (e.g. the goal in a .non file)
+     * Set the cell states of an entire dawgram from a single cell state string (e.g. the goal in a .non file)
      * 
      * @param s the goal string
      */
@@ -383,7 +383,7 @@ public class Nonogram extends Observable {
         for (int row=0; row<numRows; row++) {
             for (int col=0; col<numCols; col++) {
                 int idx   = row*numCols + col;
-                int state = Nonogram.UNKNOWN;
+                int state = Dawgram.UNKNOWN;
         
                 try {
                     state = Integer.parseInt(s.substring(idx, idx+1));
@@ -513,7 +513,7 @@ public class Nonogram extends Observable {
     
     private Cell[][]     cells   = null;
 
-    // A stack to store the previous moves made on the nonogram
+    // A stack to store the previous moves made on the dawgram
     private Stack<Assign> undoStack = null;
     
     private Constraint[] rows    = null;

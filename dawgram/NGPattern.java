@@ -1,5 +1,5 @@
 /**
-* A pattern for a cell constraint (either row or column) in a Nonogram puzzle.
+* A pattern for a cell constraint (either row or column) in a Dawgram puzzle.
 * 
 * @author OTechCup
 * @credits ["Mr. O"]
@@ -7,7 +7,7 @@
 */
 
 
-package nonogram;
+package dawgram;
 
 import java.util.Arrays;
 import java.util.regex.Pattern;
@@ -27,8 +27,8 @@ public class NGPattern {
 		this.nums   = Arrays.copyOf(nums, nums.length);
 		this.minLen = calcMinLen(nums);
 		
-		if (maxLen < Nonogram.MIN_SIZE)
-			throw new IllegalArgumentException("nums cannot be shorter than " + Nonogram.MIN_SIZE);
+		if (maxLen < Dawgram.MIN_SIZE)
+			throw new IllegalArgumentException("nums cannot be shorter than " + Dawgram.MIN_SIZE);
 		
 		this.maxLen = maxLen;
 		
@@ -115,11 +115,11 @@ public class NGPattern {
 		sb.append(REGEX_EMPTY + "*?"); // optional empty chars at start
 		
 		for (int i=0; i < (nums.length-1); i++) {
-			sb.append(Nonogram.FULL + "{" + nums[i] + "}");
+			sb.append(Dawgram.FULL + "{" + nums[i] + "}");
 			sb.append(REGEX_EMPTY + "+?"); // non optional empty chars
 		}
 		
-		sb.append(Nonogram.FULL + "{" + nums[nums.length-1] + "}"); // last full chars
+		sb.append(Dawgram.FULL + "{" + nums[nums.length-1] + "}"); // last full chars
 		sb.append(REGEX_EMPTY + "*?"); // optional empty chars at end
 		
 		solved = Pattern.compile(sb.toString());
@@ -213,7 +213,7 @@ public class NGPattern {
 	}
 	
 	/**
-	 * Checks if an integer array could represent a pattern of the numbers of contiguous full cells in a nonogram row/column
+	 * Checks if an integer array could represent a pattern of the numbers of contiguous full cells in a dawgram row/column
 	 * 
 	 * @return true if passes the check, otherwise false
 	 */
@@ -233,7 +233,7 @@ public class NGPattern {
 	
 	/**
 	 * Calculate the minimum length (number of cells) that an integer array representing a pattern of the numbers of contiguous
-	 * full cells in a nonogram row/column could occupy
+	 * full cells in a dawgram row/column could occupy
 	 * 
 	 * @param nums a pattern of contiguous full cells as an integer array
 	 * @return the minimum length (number of cells)
@@ -250,8 +250,8 @@ public class NGPattern {
 		return min;
 	}
 	
-	private static final String REGEX_EMPTY = "[" + Nonogram.EMPTY + Nonogram.UNKNOWN + "]";
-	private static final String REGEX_FULL  = "[" + Nonogram.FULL  + Nonogram.UNKNOWN + "]";
+	private static final String REGEX_EMPTY = "[" + Dawgram.EMPTY + Dawgram.UNKNOWN + "]";
+	private static final String REGEX_FULL  = "[" + Dawgram.FULL  + Dawgram.UNKNOWN + "]";
 	
 	private int[]   nums   = null;
 	private int     minLen = -1;   // minimum length of the pattern

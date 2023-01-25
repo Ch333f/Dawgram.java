@@ -1,5 +1,5 @@
 /**
-* A cell in a Nonogram puzzle.
+* A cell in a Dawgram puzzle.
 * 
 * @author OTechCup
 * @credits ["Mr. O"]
@@ -7,18 +7,18 @@
 */
 
 
-package nonogram;
+package dawgram;
 
 
 public class Cell {
 	/**
 	 * Constructor, the state is set to UNKNOWN
 	 * 
-	 * @param ng the nonogram puzzle this cell is part of
+	 * @param ng the dawgram puzzle this cell is part of
 	 * @param row the cell row in the grid
 	 * @param col the cell column in the grid
 	 */
-	public Cell(Nonogram ng, int row, int col) {
+	public Cell(Dawgram ng, int row, int col) {
 		if (ng == null)
 			throw new IllegalArgumentException("ng cannot be null");
 		
@@ -31,18 +31,18 @@ public class Cell {
 		this.ng    = ng;
 		this.row   = row;
 		this.col   = col;
-		this.state = Nonogram.UNKNOWN;
+		this.state = Dawgram.UNKNOWN;
 	}
 	
 	/**
 	 * Constructor
 	 * 
-	 * @param ng the nonogram puzzle this cell is part of
+	 * @param ng the dawgram puzzle this cell is part of
 	 * @param row the cell row in the grid
 	 * @param col the cell column in the grid
 	 * @param state the initial Cell state
 	 */
-	public Cell(Nonogram ng, int row, int col, int state) {
+	public Cell(Dawgram ng, int row, int col, int state) {
 		this(ng, row, col);
 		if (!isValidState(state))
 			throw new IllegalArgumentException("invalid state (" + state + ")");
@@ -74,8 +74,8 @@ public class Cell {
 	 */
 	public boolean isFull() {
 		if (!checkState())
-			throw new NonogramException("invalid cell state (" + state + ")");
-		return state == Nonogram.FULL;
+			throw new DawgramException("invalid cell state (" + state + ")");
+		return state == Dawgram.FULL;
 	}
 	
 	/**
@@ -85,8 +85,8 @@ public class Cell {
 	 */
 	public boolean isEmpty() {
 		if (!checkState())
-			throw new NonogramException("invalid cell state (" + state + ")");
-		return state == Nonogram.EMPTY;
+			throw new DawgramException("invalid cell state (" + state + ")");
+		return state == Dawgram.EMPTY;
 	}
 	
 	/**
@@ -96,8 +96,8 @@ public class Cell {
 	 */
 	public boolean isUnknown() {
 		if (!checkState())
-			throw new NonogramException("invalid cell state (" + state + ")");
-		return state == Nonogram.UNKNOWN;
+			throw new DawgramException("invalid cell state (" + state + ")");
+		return state == Dawgram.UNKNOWN;
 	}
 	
 	/**
@@ -107,7 +107,7 @@ public class Cell {
 	 */
 	public int getState() {
 		if (!checkState())
-			throw new NonogramException("invalid cell state (" + state + ")");
+			throw new DawgramException("invalid cell state (" + state + ")");
 		return state;
 	}
 	
@@ -115,21 +115,21 @@ public class Cell {
 	 * Set the cell state to FULL
 	 */
 	public void setFull() {
-		state = Nonogram.FULL;
+		state = Dawgram.FULL;
 	}
 	
 	/**
 	 * Set the cell state to EMPTY
 	 */
 	public void setEmpty() {
-		state = Nonogram.EMPTY;
+		state = Dawgram.EMPTY;
 	}
 	
 	/**
 	 * Set the cell state to UNKNOWN
 	 */
 	public void setUnknown() {
-		state = Nonogram.UNKNOWN;
+		state = Dawgram.UNKNOWN;
 	}
 	
 	/**
@@ -139,7 +139,7 @@ public class Cell {
 	 */
 	void setState(int state) {
 		if (!isValidState(state))
-			throw new NonogramException("invalid state (" + state + ")");
+			throw new DawgramException("invalid state (" + state + ")");
 		this.state = state;
 	}
 	
@@ -185,26 +185,26 @@ public class Cell {
 	 * @return true if the state is valid, otherwise false
 	 */
 	public static boolean isValidState(int state) {
-		if ((state == Nonogram.FULL)  ||
-				(state == Nonogram.EMPTY) ||
-				(state == Nonogram.UNKNOWN))
+		if ((state == Dawgram.FULL)  ||
+				(state == Dawgram.EMPTY) ||
+				(state == Dawgram.UNKNOWN))
 			return true;
 		else
 			return false;
 	}
 	
 	/**
-	 * Check that all the cells in an array are from the same nonogram
+	 * Check that all the cells in an array are from the same dawgram
 	 * 
 	 * @param cells the array of cells to check
-	 * @return true if all the cells are from the same nonogram, otherwise false
+	 * @return true if all the cells are from the same dawgram, otherwise false
 	 */
-	public static boolean checkSameNonogram(Cell[] cells) {
+	public static boolean checkSameDawgram(Cell[] cells) {
 		if (cells == null)
 			throw new IllegalArgumentException("cells cannot be null");
-		if (cells.length < Nonogram.MIN_SIZE)
-			throw new IllegalArgumentException("cells cannot be shorter than " + Nonogram.MIN_SIZE);
-		Nonogram ng = cells[0].ng;
+		if (cells.length < Dawgram.MIN_SIZE)
+			throw new IllegalArgumentException("cells cannot be shorter than " + Dawgram.MIN_SIZE);
+		Dawgram ng = cells[0].ng;
 		for (int i=1; i<cells.length; i++)
 			if (cells[i].ng != ng)
 				return false;
@@ -214,5 +214,5 @@ public class Cell {
 	private int      state;
 	private int      row;
 	private int      col;
-  private Nonogram ng = null;	
+  private Dawgram ng = null;	
 }

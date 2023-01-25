@@ -1,5 +1,5 @@
 /**
-* A problem-specific run time exception for a Nonogram puzzle.
+* A problem-specific run time exception for a Dawgram puzzle.
 * 
 * @author OTechCup
 * @credits ["Mr. O"]
@@ -7,17 +7,17 @@
 */
 
 
-package nonogram;
+package dawgram;
 
 
 @SuppressWarnings("serial")
-public class NonogramException extends RuntimeException {
+public class DawgramException extends RuntimeException {
 	/**
 	 * Constructor with explanatory message
 	 * 
 	 * @param message the explanatory message
 	 */
-	public NonogramException(String msg) {
+	public DawgramException(String msg) {
 		super(msg);
 	}
 }

@@ -1,5 +1,5 @@
 /**
-* A cell constraint (either row or column) in a Nonogram puzzle.
+* A cell constraint (either row or column) in a Dawgram puzzle.
 * 
 * @author OTechCup
 * @credits ["Mr. O"]
@@ -7,7 +7,7 @@
 */
 
 
-package nonogram;
+package dawgram;
 
 import java.util.Arrays;
 
@@ -26,11 +26,11 @@ public class Constraint {
 		if (cells == null)
 			throw new IllegalArgumentException("cells cannot be null");
 		
-		if (cells.length < Nonogram.MIN_SIZE)
-			throw new IllegalArgumentException("cells cannot be shorter than " + Nonogram.MIN_SIZE);
+		if (cells.length < Dawgram.MIN_SIZE)
+			throw new IllegalArgumentException("cells cannot be shorter than " + Dawgram.MIN_SIZE);
 		
-		if (!Cell.checkSameNonogram(cells))
-			throw new IllegalArgumentException("cells must all be from the same Nonogram");
+		if (!Cell.checkSameDawgram(cells))
+			throw new IllegalArgumentException("cells must all be from the same Dawgram");
 		
 		if (pat.getMaxLen() != cells.length)
 			throw new IllegalArgumentException("pat maxLen ("+pat.getMaxLen()+") must match length of cells array ("+cells.length+")");
@@ -108,7 +108,7 @@ public class Constraint {
 		String seq = sb.toString();
 		
 		if (pat.getMaxLen() != seq.length())
-			throw new NonogramException("cells sequence length ("+seq.length()+") must match pat maxLen ("+pat.getMaxLen()+")");
+			throw new DawgramException("cells sequence length ("+seq.length()+") must match pat maxLen ("+pat.getMaxLen()+")");
 		
 		return seq;
 	}
@@ -129,7 +129,7 @@ public class Constraint {
 			throw new IllegalArgumentException("seq length ("+seq.length()+") must match length of cells array ("+cells.length+")");
 		
 		for (int i=0; i<cells.length; i++) {
-			int state = Nonogram.UNKNOWN;
+			int state = Dawgram.UNKNOWN;
 		
 			try {
 				state = Integer.parseInt(seq.substring(i, i+1));
